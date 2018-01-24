@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * Hook implements hook_preprocess_node()
+ */
+function btn_social_preprocess_node(&$vars){
+  if ($vars['view_mode'] == 'full'){
+    if ($vars['type'] == 'news' || $vars['type'] == 'product'){
+      $v['link'] = url('node/' . $vars['nid'], array('absolute' => TRUE));
+
+      $vars['content']['social'] = array(
+        '#prefix' => '<ul class="btn-social clearfix spazio-40">',
+        '#suffix' => '</ul>',
+        '#weight' => 4,
+      );
+
+      if ($vars['type'] == 'news'){
+        $vars['content']['social']['#weight'] = 10;
+      }
+
+      $social_bt = _btn_socials($v);
+      foreach ($social_bt as $key => $bt) {
+        $vars['content']['social'][$key] = array(
+          '#prefix' => '<li class="li-soc li-soc-' . $key . '">',
+          '#markup' => $bt['code'],
+          '#suffix' => '</li>',
+        );
+        if (isset($bt['js'])){
+          drupal_add_js($bt['js'], array('type' => 'external', 'scope' => 'footer'));
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Elenco dei bottoni social
+ */
+function _btn_socials($vars){
+  $data = array(
+    'tw' => array(
+      'code' => '<a href="//twitter.com/share" class="twitter-share-button" data-url="' . $vars['link'] .'" data-count="horizontal">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>',
+    ),
+    'pl' => array(
+      'code' => '<g:plusone size="medium" href="'. $vars['link'] .'"></g:plusone>',
+      'js' => 'https://apis.google.com/js/plusone.js',
+    ),
+    'pin' => array(
+      'code' => '<a href="//pinterest.com/pin/create/button/?url=' . $vars['link'] . '" class="pin-it-button" count-layout="horizontal">Pin It</a>',
+      'js' => '//assets.pinterest.com/js/pinit.js',
+    ),
+    'fb' => array(
+      'code' => '<div class="fb-like" data-share="true" data-width="300" data-show-faces="true"></div>',
+    ), // Bisogna creare una app su FB relativa al sito web e inserire il codice in html.tpl.php
+  );
+  return $data;
+}

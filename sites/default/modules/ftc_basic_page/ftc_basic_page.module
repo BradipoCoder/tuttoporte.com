@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FTC Basic page (field and instances) feature.
+ */
+
+include_once 'ftc_basic_page.features.inc';

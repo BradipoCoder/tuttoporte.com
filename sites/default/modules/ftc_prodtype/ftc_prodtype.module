@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FTC Macro categoria di prodotti feature.
+ */
+
+include_once 'ftc_prodtype.features.inc';

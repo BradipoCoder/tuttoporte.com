@@ -1,0 +1,40 @@
+diff --git a/eu_cookie_compliance.admin.inc b/eu_cookie_compliance.admin.inc
+index a678712..31710d3 100755
+--- a/eu_cookie_compliance.admin.inc
++++ b/eu_cookie_compliance.admin.inc
+@@ -238,7 +238,7 @@ function eu_cookie_compliance_admin_form_validate($form, &$form_state) {
+     form_set_error('eu_cookie_compliance_' . $ln . '][popup_link', t('Looks like your privacy policy link contains fragment #, you should make this an absolute url eg @link', array('@link' => $popup_link)));
+   }
+ 
+-  cache_clear_all('eu_cookie_compliance_client_settings_' . $language->language, 'cache');
++  cache_clear_all('eu_cookie_compliance_client_data_' . $ln, 'cache', TRUE);
+ }
+ 
+ /**
+diff --git a/eu_cookie_compliance.module b/eu_cookie_compliance.module
+index da8f511..f53f5c8 100755
+--- a/eu_cookie_compliance.module
++++ b/eu_cookie_compliance.module
+@@ -71,10 +71,11 @@ function eu_cookie_compliance_page_build(&$page) {
+   }
+ 
+   if (!empty($popup_settings['popup_enabled']) && user_access('display EU Cookie Compliance popup') && $geoip_match && $domain_allow && !$path_match) {
+-    global $language;
++    global $language, $theme;
+     // Array storage for caching full client data.
+     $data = array();
+-    if($cache = cache_get('eu_cookie_compliance_client_settings_' . $language->language, 'cache')) {
++    $cid = 'eu_cookie_compliance_client_data_' . $language->language . '_' . $theme;
++    if($cache = cache_get($cid)) {
+       $data = $cache->data;
+     }
+     else {
+@@ -120,7 +121,7 @@ function eu_cookie_compliance_page_build(&$page) {
+         'popup_language' => $language->language,
+         'domain' => variable_get('eu_cookie_compliance_domain', ''),
+       );
+-      cache_set('eu_cookie_compliance_client_settings_' . $language->language, $data, 'cache', CACHE_TEMPORARY);
++      cache_set($cid, $data, 'cache', CACHE_TEMPORARY);
+      }
+     drupal_add_css($data['css'], array('type' => 'inline'));
+     drupal_add_js(array('eu_cookie_compliance' => $data['variables']), array('type' => 'setting', 'scope' => 'footer'));

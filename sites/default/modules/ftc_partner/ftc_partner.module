@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FTC Partner (field and instances) feature.
+ */
+
+include_once 'ftc_partner.features.inc';

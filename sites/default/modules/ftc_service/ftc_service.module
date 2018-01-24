@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FTC Service feature.
+ */
+
+include_once 'ftc_service.features.inc';

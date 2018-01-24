@@ -1,0 +1,21 @@
+/* custom archive block */
+#block-custom-blog-archive-custom-blog-archive .clicker{
+  cursor: pointer;
+}
+
+#block-custom-blog-archive-custom-blog-archive ul.years,
+#block-custom-blog-archive-custom-blog-archive ul.months{
+  list-style: none;
+}
+
+#block-custom-blog-archive-custom-blog-archive ul.months{
+  margin-left: 0.5em;
+}
+
+#block-custom-blog-archive-custom-blog-archive ul.items{
+  display: none;
+}
+
+#block-custom-blog-archive-custom-blog-archive li.year:first-child li.month:first-child ul.items{
+  display: block; /* show the first month's nodes by default */
+}

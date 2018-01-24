@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FTC Produttore (field and instances) feature.
+ */
+
+include_once 'ftc_brand.features.inc';

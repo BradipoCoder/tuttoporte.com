@@ -1,0 +1,7 @@
+Tema di terzo livello
+
+* Viene caricato il file style.less (smile.info)
+* bootstrap.less ricarica le variabili (variables.less), modificabili a piacere
+* gli altri file li recupera dal tema 'smile' (per questo non va disabilitato)
+* anche drupal.less viene caricato dal tema smile
+* in custom.less vanno insierite le personalizzazioni del tema di terzo livello

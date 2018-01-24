@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the FTC Webform (field and instances) feature.
+ */
+
+include_once 'ftc_webform.features.inc';
